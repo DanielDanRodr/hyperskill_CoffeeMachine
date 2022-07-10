@@ -1,0 +1,122 @@
+package machine;
+import java.util.Scanner;
+
+public class CoffeeMachine {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // initial state
+        int initWater = 400;
+        int initMilk = 540;
+        int initBeans = 120;
+        int initCups = 9;
+        int initMoney = 550;
+        System.out.println("The coffee machine has:");
+        System.out.printf("%d ml of water%n", initWater);
+        System.out.printf("%d ml of milk%n", initMilk);
+        System.out.printf("%d g of coffee beans%n", initBeans);
+        System.out.printf("%d disposable cups%n", initCups);
+        System.out.printf("$%d of money%n", initMoney);
+        System.out.println("");
+
+        // input
+        System.out.println("Write action (buy, fill, take)");
+        String action = scanner.nextLine();
+
+        int drink = 0;
+        int addWater = 0;
+        int addMilk = 0;
+        int addBeans = 0;
+        int addCups = 0;
+
+        switch (action) {
+            case "buy":
+                System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
+                drink = scanner.nextInt();
+                break;
+            case "fill":
+                System.out.println("Write how many ml of water you want to add:");
+                addWater = scanner.nextInt();
+                System.out.println("Write how many ml of milk you want to add:");
+                addMilk = scanner.nextInt();
+                System.out.println("Write how many grams of coffee beans you want to add:");
+                addBeans = scanner.nextInt();
+                System.out.println("Write how many disposable cups of coffee you want to add:");
+                addCups = scanner.nextInt();
+                System.out.println("");
+                System.out.println("The coffee machine has:");
+                System.out.println(initWater + addWater + " ml of water");
+                System.out.println(initMilk + addMilk + " ml of milk");
+                System.out.println(initBeans + addBeans + " g of coffee beans");
+                System.out.println(initCups + addCups + " disposable cups");
+                System.out.println(initMoney + " of money");
+                break;
+            case "take":
+                System.out.println("I gave you $550");
+                System.out.println("");
+                System.out.println("The coffee machine has:");
+                System.out.println(initWater + " ml of water");
+                System.out.println(initMilk + " ml of milk");
+                System.out.println(initBeans + " g of coffee beans");
+                System.out.println(initCups + " disposable cups");
+                System.out.println("$0 of money");
+                break;
+        }
+
+        // calculating remaining supply
+
+        int finalWater = 0;
+        int finalMilk = 0;
+        int finalBeans = 0;
+        int finalCups = 0;
+        int finalMoney = 0;
+
+        final int waterEspresso = 250;
+        final int waterLatte = 350;
+        final int waterCappuccino = 200;
+        final int milkEspresso = 0;
+        final int milkLatte = 75;
+        final int milkCappuccino = 100;
+        final int beansEspresso = 16;
+        final int beansLatte = 20;
+        final int beansCappuccino = 12;
+        final int costEspresso = 4;
+        final int costLatte = 7;
+        final int costCappuccino = 6;
+        final int drinkingCup = 1;
+
+        if (drink > 0) {
+            switch (drink) {
+                case 1:
+                    finalWater = initWater - waterEspresso;
+                    finalMilk = initMilk - milkEspresso;
+                    finalBeans = initBeans - beansEspresso;
+                    finalCups = initCups - drinkingCup;
+                    finalMoney = initMoney + costEspresso;
+                    break;
+                case 2:
+                    finalWater = initWater - waterLatte;
+                    finalMilk = initMilk - milkLatte;
+                    finalBeans = initBeans - beansLatte;
+                    finalCups = initCups - drinkingCup;
+                    finalMoney = initMoney + costLatte;
+                    break;
+                case 3:
+                    finalWater = initWater - waterCappuccino;
+                    finalMilk = initMilk - milkCappuccino;
+                    finalBeans = initBeans - beansCappuccino;
+                    finalCups = initCups - drinkingCup;
+                    finalMoney = initMoney + costCappuccino;
+                    break;
+            }
+            System.out.println("The coffee machine has:");
+            System.out.println(finalWater + " ml of water");
+            System.out.println(finalMilk + " ml of milk");
+            System.out.println(finalBeans + " g of coffee beans");
+            System.out.println(finalCups + " disposable cups");
+            System.out.println(finalMoney + " of money");
+        }
+
+
+    }
+}
